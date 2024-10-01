@@ -1,0 +1,25 @@
+﻿<Window x:Class="PR07_Muhiarov.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PR07_Muhiarov"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Label x:Name="lb" Content="Label" HorizontalAlignment="Left" Margin="376,10,0,0" VerticalAlignment="Top"/>
+        <Button Content="" HorizontalAlignment="Left" Margin="419,18,0,0" VerticalAlignment="Top" Height="5" Width="13" Opacity="0" Click="Button_Click"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="416,18,0,0" VerticalAlignment="Top" Height="5" Width="16">
+            <Image Source="Resources\Up.png" Width="20" Height="5"/>
+        </StackPanel>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="419,23,0,0" VerticalAlignment="Top" Height="5" Width="13" Opacity="0" Click="Button_Click_1"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="419,23,0,0" VerticalAlignment="Top" Height="5" Width="13">
+            <Image Source="Resources\down.png" Width="14" Height="5"/>
+        </StackPanel>
+        <Button Content="Создать" HorizontalAlignment="Left" Height="10" Margin="437,18,0,0" VerticalAlignment="Top" Width="25" FontSize="4" Click="Button_Click_2"/>
+        <Rectangle HorizontalAlignment="Left" Height="366" Margin="122,58,0,0" Stroke="Black" VerticalAlignment="Top" Width="22" Fill="Black"/>
+        <Rectangle HorizontalAlignment="Center" Height="366" Margin="0,58,0,0" Stroke="Black" VerticalAlignment="Top" Width="22" Fill="Black"/>
+        <Rectangle HorizontalAlignment="Left" Height="366" Margin="635,58,0,0" Stroke="Black" VerticalAlignment="Top" Width="22" Fill="Black"/>
+        <Grid x:Name="grid1"/>
+    </Grid>
+</Window>
