@@ -71,9 +71,19 @@ namespace PR07_Muhiarov
                     i++;
                     Create(i);
                 }
-                    
             }
         }
-
+        public void Moving()
+        {
+            if (grid1.Children[0].IsMouseCaptureWithin)
+            {
+                
+            };
+        }
+        private bool IsTopDisk(Rectangle disk)
+        {
+            Stack<Rectangle> towerStack = FindDiskStack(disk);
+            return towerStack != null && towerStack.Peek() == disk;
+        }
     }
 }
