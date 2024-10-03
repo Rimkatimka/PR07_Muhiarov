@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PR07_Muhiarov
@@ -24,66 +13,68 @@ namespace PR07_Muhiarov
         public static int p = 3;
         public MainWindow()
         {
+            TowerOfHanoi game = new TowerOfHanoi();
             InitializeComponent();
-            lb.Content = "3";
         }
+        public class Tower
+        {
+            public int RingCount { get; set; }
+            public int[] Rings { get; private set; }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            p++;
-            lb.Content = p;
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            p--;
-            lb.Content = p;
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            grid1.Children.Clear();
-            Create(-1);
-        }
-        public void Create(int i)
-        {
-            if (i < p)
+            public Tower(int maxRingCount)
             {
-                Rectangle rectangle = new Rectangle();
-                rectangle.Stroke = Brushes.Gold;
-                if (i == -1)
+                RingCount = 0;
+                Rings = new int[maxRingCount];
+            }
+
+            public void MoveRing(Tower targetTower)
+            {
+                if (RingCount > 0)
                 {
-                    rectangle.Width = 30;
-                    rectangle.Height = 25;
-                    rectangle.Margin = new Thickness(-518, (400 - p * 50), 0, 0);
-                    rectangle.Fill = Brushes.Gold;
-                    grid1.Children.Add(rectangle);
-                    i++;
-                    Create(i);
+                    if (targetTower.RingCount > 0)
+                    {
+                        if (Rings[RingCount - 1] >= targetTower.Rings[targetTower.RingCount - 1])
+                        {
+                            throw new InvalidOperationException("Cannot place a larger ring on top of a smaller ring.");
+                        }
+                    }
+
+                    targetTower.Rings[targetTower.RingCount] = Rings[RingCount - 1];
+                    Rings[RingCount - 1] = 0;
+                    RingCount--;
+                    targetTower.RingCount++;
                 }
                 else
                 {
-                    rectangle.Width = i * 50;
-                    rectangle.Height = 25;
-                    rectangle.Margin = new Thickness(-518, (400 - p * 50) + i * 50, 0, 0);
-                    rectangle.Fill = Brushes.Gold;
-                    grid1.Children.Add(rectangle);
-                    i++;
-                    Create(i);
+                    throw new InvalidOperationException("There are no rings to move.");
                 }
             }
         }
-        public void Moving()
+
+        public class TowerOfHanoi
         {
-            if (grid1.Children[0].IsMouseCaptureWithin)
+            private const int MaxRingCount = 5;
+            private Tower[] towers;
+
+            public TowerOfHanoi()
             {
-                
-            };
+                towers = new Tower[3];
+                for (int i = 0; i < towers.Length; i++)
+                {
+                    towers[i] = new Tower(MaxRingCount);
+                }
+                InitTowers();
+            }
+
+            private void InitTowers()
+            {
+                towers[0].RingCount = MaxRingCount;
+                for (int i = 0; i < MaxRingCount; i++)
+                {
+                    towers[0].Rings[i] = MaxRingCount - i;
+                }
+            }
         }
-        private bool IsTopDisk(Rectangle disk)
-        {
-            Stack<Rectangle> towerStack = FindDiskStack(disk);
-            return towerStack != null && towerStack.Peek() == disk;
-        }
+
     }
 }
