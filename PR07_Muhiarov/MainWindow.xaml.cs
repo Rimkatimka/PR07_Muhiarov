@@ -80,10 +80,5 @@ namespace PR07_Muhiarov
                 
             };
         }
-        private bool IsTopDisk(Rectangle disk)
-        {
-            Stack<Rectangle> towerStack = FindDiskStack(disk);
-            return towerStack != null && towerStack.Peek() == disk;
-        }
     }
 }
